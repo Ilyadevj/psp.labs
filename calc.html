@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Калькулятор</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark">
+
+<header class="header">
+  <button class="back-btn" onclick="goBack()">← Назад</button>
+</header>
+
+<div class="calculator">
+
+  <div id="result" class="result">0</div>
+
+  <div class="buttons">
+
+  <!-- верх -->
+  <button onclick="clearAll()">C</button>
+  <button onclick="sign()">±</button>
+  <button onclick="percent()">%</button>
+  <button onclick="input('/')">/</button>
+
+  <!-- цифры -->
+  <button onclick="input('7')">7</button>
+  <button onclick="input('8')">8</button>
+  <button onclick="input('9')">9</button>
+  <button onclick="input('*')">×</button>
+
+  <button onclick="input('4')">4</button>
+  <button onclick="input('5')">5</button>
+  <button onclick="input('6')">6</button>
+  <button onclick="input('-')">−</button>
+
+  <button onclick="input('1')">1</button>
+  <button onclick="input('2')">2</button>
+  <button onclick="input('3')">3</button>
+  <button onclick="input('+')">+</button>
+
+  <button onclick="input('0')" class="wide">0</button>
+  <button onclick="input('.')">.</button>
+  <button onclick="calculate()">=</button>
+
+  <!-- доп функции -->
+  <button onclick="backspace()">⌫</button>
+  <button onclick="square()">x²</button>
+  <button onclick="sqrt()">√</button>
+  <button onclick="factorialFunc()">x!</button>
+
+  <button onclick="addTripleZero()" class="wide">000</button>
+  <button onclick="changeResultColor()">🎨</button>
+  <button onclick="randomNumber()">R</button>
+</div>
+</div>
+
+
+<footer>
+  ЛР выполнил: Девятов Илья, ИУ5-42Б
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
