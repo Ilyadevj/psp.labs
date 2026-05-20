@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -139,45 +140,7 @@
                     </div>
 
                     <div class="hot-flights">
-                        <div class="section-header">
-                            <h2 class="section-title">Горячие билеты</h2>
-                        </div>
-                        <div class="flights-grid" id="hotFlightsGrid">
-                            <div class="flight-card">
-                                <div class="flight-price">2 878 ₽</div>
-                                <div class="flight-route">Москва — Сочи</div>
-                                <div class="flight-date">11 мая, пн</div>
-                                <div class="flight-time">16:50 – 20:35</div>
-                                <div class="flight-info">3.5 ч в пути / Прямой</div>
-                                <button class="flight-book">Выбрать</button>
-                            </div>
-                            <div class="flight-card">
-                                <div class="flight-price">5 382 ₽</div>
-                                <div class="flight-route">Москва — Анталья</div>
-                                <div class="flight-date">12 мая, вт</div>
-                                <div class="flight-time">08:15 – 12:45</div>
-                                <div class="flight-info">4.5 ч в пути / Прямой</div>
-                                <button class="flight-book">Выбрать</button>
-                            </div>
-                            <div class="flight-card">
-                                <div class="flight-price">3 450 ₽</div>
-                                <div class="flight-route">Москва — СПБ</div>
-                                <div class="flight-date">13 мая, ср</div>
-                                <div class="flight-time">09:30 – 11:00</div>
-                                <div class="flight-info">1.5 ч в пути / Прямой</div>
-                                <button class="flight-book">Выбрать</button>
-                            </div>
-                            <div class="flight-card">
-                                <div class="flight-price">4 990 ₽</div>
-                                <div class="flight-route">Москва — Казань</div>
-                                <div class="flight-date">14 мая, чт</div>
-                                <div class="flight-time">13:20 – 15:10</div>
-                                <div class="flight-info">1.8 ч в пути / Прямой</div>
-                                <button class="flight-book">Выбрать</button>
-                            </div>
-                        </div>
-                        <div class="more-link">
-                            <a href="#" class="more-btn" id="moreFlightsBtn">Больше жарких билетов →</a>
+                        <div id="app-root">
                         </div>
                     </div>
 
@@ -217,6 +180,8 @@
         <p>✈️ Avia — поиск дешёвых авиабилетов</p>
     </footer>
 
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
+    <script src="main.js" type="module"></script>
 </body>
 </html>
