@@ -1,0 +1,281 @@
+  .hotels-hero {
+    padding: 120px 24px 80px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #eef2ff 100%);
+    min-height: 100vh;
+}
+
+.hotels__container {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.hotels__content {
+    text-align: center;
+}
+
+.hotels__title {
+    font-size: 52px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hotels__subtitle {
+    font-size: 18px;
+    color: var(--text-light);
+    margin-bottom: 48px;
+}
+
+.hotels-search-card {
+    background: var(--white);
+    border-radius: 32px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 48px;
+}
+
+.hotels-search-form {
+    padding: 28px;
+}
+
+.hotels-form-row {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.hotels-form-group {
+    flex: 1;
+}
+
+.hotels-form-group.full-width {
+    flex: 100%;
+}
+
+.hotels-form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.input-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon .icon {
+    position: absolute;
+    left: 16px;
+    font-size: 18px;
+}
+
+.input-icon input,
+.input-icon select {
+    width: 100%;
+    padding: 14px 16px 14px 48px;
+    border: 2px solid var(--gray-border);
+    border-radius: 16px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.2s;
+    background: var(--white);
+}
+
+.input-icon input:focus,
+.input-icon select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(94, 59, 238, 0.1);
+}
+
+.hotels-search-btn {
+    width: 100%;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: var(--white);
+    border: none;
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 24px;
+}
+
+.hotels-search-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.benefits-grid {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 60px;
+    flex-wrap: wrap;
+}
+
+.benefit-card {
+    background: var(--white);
+    padding: 32px;
+    border-radius: 28px;
+    flex: 1;
+    text-align: center;
+    transition: all 0.2s;
+    box-shadow: var(--shadow);
+}
+
+.benefit-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+}
+
+.benefit-card.large {
+    flex: 2;
+}
+
+.benefit-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.benefit-card h3 {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: var(--text);
+}
+
+.benefit-card p {
+    color: var(--text-light);
+    line-height: 1.5;
+}
+
+/* Popular Hotels */
+.popular-hotels {
+    background: var(--white);
+    border-radius: 32px;
+    padding: 32px;
+    box-shadow: var(--shadow);
+}
+
+.section-title {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 28px;
+    color: var(--text);
+}
+
+.hotels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+}
+
+.hotel-item {
+    padding: 24px;
+    background: var(--gray);
+    border-radius: 24px;
+    transition: all 0.2s;
+    cursor: pointer;
+    text-align: left;
+}
+
+.hotel-item:hover {
+    transform: translateY(-4px);
+    background: var(--white);
+    box-shadow: var(--shadow);
+}
+
+.hotel-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+}
+
+.hotel-item h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.hotel-item p {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-bottom: 12px;
+}
+
+.hotel-price {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.hotel-rating {
+    font-size: 13px;
+    color: #f5a623;
+    font-weight: 600;
+}
+
+.hotel-book-btn {
+    width: 100%;
+    margin-top: 16px;
+    padding: 10px;
+    background: var(--gray);
+    border: none;
+    border-radius: 12px;
+    font-family: inherit;
+    font-weight: 600;
+    color: var(--primary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.hotel-book-btn:hover {
+    background: var(--primary);
+    color: var(--white);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hotels__title {
+        font-size: 32px;
+    }
+    
+    .hotels-form-row {
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .benefits-grid {
+        flex-direction: column;
+    }
+    
+    .benefit-card.large {
+        flex: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .hotels-search-form {
+        padding: 20px;
+    }
+    
+    .hotels-grid {
+        grid-template-columns: 1fr;
+    }
+}

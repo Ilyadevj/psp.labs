@@ -1,65 +1,120 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Калькулятор</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>avia — Калькулятор</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="calc.css">
 </head>
-<body class="dark">
+<body>
+    <header class="header">
+        <div class="header__container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon">✈️</span>
+                <span class="logo-text">avia</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Авиабилеты</a>
+                <a href="hotels.html" class="nav-link">Отели</a>
+                <a href="calc.html" class="nav-link active">Калькулятор</a>
+                <a href="#" class="nav-link">Профиль</a>
+            </nav>
+        </div>
+    </header>
 
-<header class="header">
-  <button class="back-btn" onclick="goBack()">← Назад</button>
-</header>
+    <main>
+        <div class="calc-wrapper">
+            <div class="calc-container" id="calcContainer">
+                <div class="calc-header">
+                    <div class="logo-mini">
+                        <span class="logo-icon">🧮</span>
+                        <span class="logo-name">avia calculator</span>
+                    </div>
+                    <button class="theme-toggle" id="themeToggleBtn" title="Сменить тему">🌙</button>
+                </div>
 
-<div class="calculator">
+                <div class="display-wrapper">
+                    <div class="display" id="display">0</div>
+                    <div class="display-sub" id="displaySub"></div>
+                </div>
 
-  <div id="result" class="result">0</div>
+                <div class="buttons-grid">
+                    <button class="calc-btn special" data-action="clear">C</button>
+                    <button class="calc-btn special" data-action="backspace">⌫</button>
+                    <button class="calc-btn special" data-action="sign">±</button>
+                    <button class="calc-btn operator" data-op="/">÷</button>
 
-  <div class="buttons">
+                    <button class="calc-btn number" data-num="7">7</button>
+                    <button class="calc-btn number" data-num="8">8</button>
+                    <button class="calc-btn number" data-num="9">9</button>
+                    <button class="calc-btn operator" data-op="*">×</button>
 
-  <!-- верх -->
-  <button onclick="clearAll()">C</button>
-  <button onclick="sign()">±</button>
-  <button onclick="percent()">%</button>
-  <button onclick="input('/')">/</button>
+                    <button class="calc-btn number" data-num="4">4</button>
+                    <button class="calc-btn number" data-num="5">5</button>
+                    <button class="calc-btn number" data-num="6">6</button>
+                    <button class="calc-btn operator" data-op="-">−</button>
 
-  <!-- цифры -->
-  <button onclick="input('7')">7</button>
-  <button onclick="input('8')">8</button>
-  <button onclick="input('9')">9</button>
-  <button onclick="input('*')">×</button>
+                    <button class="calc-btn number" data-num="1">1</button>
+                    <button class="calc-btn number" data-num="2">2</button>
+                    <button class="calc-btn number" data-num="3">3</button>
+                    <button class="calc-btn operator" data-op="+">+</button>
 
-  <button onclick="input('4')">4</button>
-  <button onclick="input('5')">5</button>
-  <button onclick="input('6')">6</button>
-  <button onclick="input('-')">−</button>
+                    <button class="calc-btn number" data-num="0">0</button>
+                    <button class="calc-btn number" data-num="000">000</button>
+                    <button class="calc-btn number" data-num=".">.</button>
+                    <button class="calc-btn equals" data-action="equals">=</button>
 
-  <button onclick="input('1')">1</button>
-  <button onclick="input('2')">2</button>
-  <button onclick="input('3')">3</button>
-  <button onclick="input('+')">+</button>
+                    <button class="calc-btn scientific" data-action="sqrt">√</button>
+                    <button class="calc-btn scientific" data-action="square">x²</button>
+                    <button class="calc-btn scientific" data-action="factorial">x!</button>
+                    <button class="calc-btn scientific" data-action="percent">%</button>
+                    
+                    <button class="calc-btn memory" data-action="mPlus">M+</button>
+                    <button class="calc-btn memory" data-action="mMinus">M-</button>
+                    <button class="calc-btn memory" data-action="mRecall">MR</button>
+                    <button class="calc-btn memory" data-action="mClear">MC</button>
+                </div>
 
-  <button onclick="input('0')" class="wide">0</button>
-  <button onclick="input('.')">.</button>
-  <button onclick="calculate()">=</button>
+                <details class="details-info">
+                    <summary>📋 Информация об авторе</summary>
+                    <div class="details-content">
+                        <p><strong>ФИО:</strong> Девятов Илья</p>
+                        <p><strong>Группа:</strong> ИУ5-42Б</p>
+                    </div>
+                </details>
 
-  <!-- доп функции -->
-  <button onclick="backspace()">⌫</button>
-  <button onclick="square()">x²</button>
-  <button onclick="sqrt()">√</button>
-  <button onclick="factorialFunc()">x!</button>
+                <details class="details-info">
+                    <summary>🎯 Цель лабораторной работы</summary>
+                    <div class="details-content">
+                        <p>Цель работы: <mark class="highlight">знакомство</mark> с основами <mark class="highlight">HTML</mark>, <mark class="highlight">CSS</mark></p>
+                    </div>
+                </details>
 
-  <button onclick="addTripleZero()" class="wide">000</button>
-  <button onclick="changeResultColor()">🎨</button>
-  <button onclick="randomNumber()">R</button>
-</div>
-</div>
+                <div class="github-section">
+                    <a href="https://github.com/Ilyadevj" target="_blank" class="github-btn" id="githubBtn">
+                        <span></span> GitHub
+                    </a>
+                </div>
 
+                <div class="extra-buttons">
+                    <button class="extra-btn" id="changeDisplayColorBtn">🎨 Сменить цвет дисплея</button>
+                </div>
 
-<footer>
-  ЛР выполнил: Девятов Илья, ИУ5-42Б
-</footer>
+                <div class="lab-signature">
+                    ЛР выполнил Девятов Илья
+                </div>
+            </div>
+        </div>
+    </main>
 
-<script src="script.js"></script>
+    <footer class="footer">
+        <p>avia — калькулятор</p>
+    </footer>
+
+    <script src="calc.js"></script>
 </body>
 </html>

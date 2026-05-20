@@ -1,57 +1,222 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Aviatheme</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>avia — дешёвые авиабилеты</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header class="header">
+        <div class="header__container">
+            <a class="logo" href="index.html">
+                <span class="logo-icon">✈️</span>
+                <span class="logo-text">avia</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html" class="nav-link active">Авиабилеты</a>
+                <a href="hotels.html" class="nav-link">Отели</a>
+                <a href="calc.html" class="nav-link">Калькулятор</a>
+                <a href="#" class="nav-link" id="profileBtn">Профиль</a>
+            </nav>
+        </div>
+    </header>
 
-<header class="header">
-  <div class="logo">✈ Aviatheme</div>
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🔐 Вход в профиль</h2>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="input-group">
+                        <label>📧 Логин / Email</label>
+                        <input type="email" id="loginEmail" placeholder="@mail.ru" required>
+                    </div>
+                    <div class="input-group">
+                        <label>🔒 Пароль</label>
+                        <input type="password" id="loginPassword" placeholder="Введите пароль" required>
+                    </div>
+                    <button type="submit" class="login-btn">Войти</button>
+                </form>
+                <div class="modal-footer">
+                    <p>Нет аккаунта? <a href="#" id="registerLink">Зарегистрироваться</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  <div class="nav-buttons">
-    <button class="icon-btn" onclick="openCalc()">
-      <i class="fas fa-calculator"></i>
-    </button>
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📝 Регистрация</h2>
+                <button class="modal-close" id="closeRegisterModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="registerForm">
+                    <div class="input-group">
+                        <label>👤 Имя</label>
+                        <input type="text" id="regName" placeholder="Иван Иванов" required>
+                    </div>
+                    <div class="input-group">
+                        <label>📧 Email</label>
+                        <input type="email" id="regEmail" placeholder="ivan@example.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label>🔒 Пароль</label>
+                        <input type="password" id="regPassword" placeholder="Минимум 6 символов" required>
+                    </div>
+                    <div class="input-group">
+                        <label>🔒 Подтвердите пароль</label>
+                        <input type="password" id="regConfirmPassword" placeholder="Повторите пароль" required>
+                    </div>
+                    <button type="submit" class="login-btn">Зарегистрироваться</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
-    <a href="https://github.com/" target="_blank" class="icon-btn">
-      <i class="fab fa-github"></i>
-    </a>
-  </div>
-</header>
+    <main>
+        <section class="hero">
+            <div class="hero__container">
+                <div class="hero__content">
+                    <h1 class="hero__title">Тут покупают дешёвые авиабилеты</h1>
 
-<section class="hero">
-  <h1>Тут покупают дешёвые авиабилеты</h1>
+                    <div class="search-card">
+                        <div class="search-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Откуда</label>
+                                    <div class="input-wrapper">
+                                        <input type="text" id="fromCity" placeholder="Москва" value="Москва">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Куда</label>
+                                    <div class="input-wrapper">
+                                        <input type="text" id="toCity" placeholder="Куда" value="Стамбул">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Когда</label>
+                                    <div class="input-wrapper">
+                                        <input type="date" id="departDate" value="2026-05-20">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Обратно</label>
+                                    <div class="input-wrapper">
+                                        <input type="date" id="returnDate" value="2026-05-27">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Пассажиры</label>
+                                    <div class="input-wrapper">
+                                        <select id="passengers">
+                                            <option selected>1 пассажир, эконом</option>
+                                            <option>2 пассажира, эконом</option>
+                                            <option>3 пассажира, эконом</option>
+                                            <option>1 пассажир, бизнес</option>
+                                            <option>2 пассажира, бизнес</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group search-btn-wrapper">
+                                    <button class="search-btn" id="searchBtn">Найти билеты</button>
+                                </div>
+                            </div>
+                            <div class="form-links">
+                                <a href="#" class="form-link">✈️ Составить сложный маршрут</a>
+                                <a href="#" class="form-link" id="ostrovokLink">🏨 Открыть Островок! в новой вкладке</a>
+                            </div>
+                        </div>
+                    </div>
 
-  <div class="search-box">
-    <input type="text" placeholder="Откуда">
-    <input type="text" placeholder="Куда">
+                    <div class="hot-flights">
+                        <div class="section-header">
+                            <h2 class="section-title">Горячие билеты</h2>
+                        </div>
+                        <div class="flights-grid" id="hotFlightsGrid">
+                            <div class="flight-card">
+                                <div class="flight-price">2 878 ₽</div>
+                                <div class="flight-route">Москва — Сочи</div>
+                                <div class="flight-date">11 мая, пн</div>
+                                <div class="flight-time">16:50 – 20:35</div>
+                                <div class="flight-info">3.5 ч в пути / Прямой</div>
+                                <button class="flight-book">Выбрать</button>
+                            </div>
+                            <div class="flight-card">
+                                <div class="flight-price">5 382 ₽</div>
+                                <div class="flight-route">Москва — Анталья</div>
+                                <div class="flight-date">12 мая, вт</div>
+                                <div class="flight-time">08:15 – 12:45</div>
+                                <div class="flight-info">4.5 ч в пути / Прямой</div>
+                                <button class="flight-book">Выбрать</button>
+                            </div>
+                            <div class="flight-card">
+                                <div class="flight-price">3 450 ₽</div>
+                                <div class="flight-route">Москва — СПБ</div>
+                                <div class="flight-date">13 мая, ср</div>
+                                <div class="flight-time">09:30 – 11:00</div>
+                                <div class="flight-info">1.5 ч в пути / Прямой</div>
+                                <button class="flight-book">Выбрать</button>
+                            </div>
+                            <div class="flight-card">
+                                <div class="flight-price">4 990 ₽</div>
+                                <div class="flight-route">Москва — Казань</div>
+                                <div class="flight-date">14 мая, чт</div>
+                                <div class="flight-time">13:20 – 15:10</div>
+                                <div class="flight-info">1.8 ч в пути / Прямой</div>
+                                <button class="flight-book">Выбрать</button>
+                            </div>
+                        </div>
+                        <div class="more-link">
+                            <a href="#" class="more-btn" id="moreFlightsBtn">Больше жарких билетов →</a>
+                        </div>
+                    </div>
 
-    <select>
-      <option>1 пассажир</option>
-      <option>2 пассажира</option>
-      <option>3 пассажира</option>
-    </select>
+                    <div class="direct-speech">
+                        <div class="speech-card">
+                            <div class="speech-quote">
+                                <span class="quote-mark">«</span>
+                                <p class="quote-text">Путешествия — это единственная вещь, которая делает тебя богаче</p>
+                                <span class="quote-mark">»</span>
+                            </div>
+                            <p class="quote-author">— Андерс, путешественник</p>
+                        </div>
+                        <div class="speech-card">
+                            <div class="speech-quote">
+                                <span class="quote-mark">«</span>
+                                <p class="quote-text">Лучший в мире отель — тот, где тебя ждут</p>
+                                <span class="quote-mark">»</span>
+                            </div>
+                            <p class="quote-author">— Мария, 48 стран</p>
+                        </div>
+                    </div>
 
-    <button class="btn-orange">Найти</button>
-  </div>
-</section>
+                    <div class="hotel-banner">
+                        <div class="hotel-banner-icon">🏨</div>
+                        <div class="hotel-banner-content">
+                            <h3>Бронирование прямо у отеля без наценок тут</h3>
+                            <p>Лучшие цены и никаких скрытых комиссий</p>
+                        </div>
+                        <button class="hotel-banner-btn" id="hotelBannerBtn">Выбрать отель</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-<!-- Details -->
-<section class="info">
-  <details>
-    <summary>Автор</summary>
-    <p>ФИО: Девятов Илья</p>
-    <p>Группа: ИУ5-42Б</p>
-  </details>
+    <footer class="footer">
+        <p>✈️ Avia — поиск дешёвых авиабилетов</p>
+    </footer>
 
-  <p class="goal">
-    Цель ЛР: <mark>знакомство</mark> с <mark>HTML</mark> и <mark>CSS</mark>
-  </p>
-</section>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
