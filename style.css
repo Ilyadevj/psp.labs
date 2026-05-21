@@ -574,3 +574,41 @@ body {
 .modal-footer a:hover {
     color: var(--secondary);
 }
+
+/* Контейнер для карточек в одну линию со скроллом */
+.flight-cards-scroll {
+    display: flex;            /* Выстраиваем карточки в гибкий ряд (флексбокс) */
+    gap: 24px;                /* Расстояние между карточками */
+    overflow-x: auto;         /* Включаем горизонтальную прокрутку, если карточки не влезают */
+    overflow-y: hidden;       /* Прячем вертикальный скролл на всякий случай */
+    padding: 16px 8px;        /* Отступы сверху и снизу, чтобы тени карточек не обрезались */
+    scroll-behavior: smooth;  /* Делаем прокрутку плавной */
+    
+    /* Настройки скроллбара для WebKit (Chrome, Safari) */
+    -webkit-overflow-scrolling: touch; /* Плавный скролл пальцем на смартфонах */
+}
+
+/* Делаем сам ползунок скролла аккуратным и тонким */
+.flight-cards-scroll::-webkit-scrollbar {
+    height: 8px;              /* Высота горизонтальной полосы прокрутки */
+}
+
+.flight-cards-scroll::-webkit-scrollbar-track {
+    background: #f1f5f9;      /* Цвет дорожки скролла */
+    border-radius: 10px;
+}
+
+.flight-cards-scroll::-webkit-scrollbar-thumb {
+    background: #cbd5e1;      /* Цвет самого ползунка */
+    border-radius: 10px;
+}
+
+.flight-cards-scroll::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;      /* Цвет ползунка при наведении */
+}
+
+/* Фиксируем ширину самих карточек, чтобы они не сжимались внутри флекса */
+.flight-cards-scroll .flight-card {
+    flex: 0 0 300px;          /* Запрещаем сжиматься и жестко задаем ширину карточки (например, 300px) */
+    box-sizing: border-box;
+}

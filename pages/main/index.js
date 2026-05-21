@@ -1,50 +1,73 @@
 import { ProductCardComponent } from "../../components/product-card/index.js";
 import { ProductPage } from "../product/index.js";
+import { ajax } from "../../modules/ajax.js";
+import { stockUrls } from "../../modules/stockUrls.js";
 
 export class MainPage {
-    constructor(parent) {
-        this.parent = parent;
-    }
+  constructor(parent) {
+    this.parent = parent;
+  }
 
-    getData() {
-        return [
-            { id: 1, price: '2 878 ₽', route: 'Москва — Сочи', date: '11 мая, пн', time: '16:50 – 20:35', info: '3.5 ч в пути / Прямой' },
-            { id: 2, price: '5 382 ₽', route: 'Москва — Анталья', date: '12 мая, вт', time: '08:15 – 12:45', info: '4.5 ч в пути / Прямой' },
-            { id: 3, price: '3 450 ₽', route: 'Москва — СПБ', date: '13 мая, ср', time: '09:30 – 11:00', info: '1.5 ч в пути / Прямой' },
-            { id: 4, price: '4 990 ₽', route: 'Москва — Казань', date: '14 мая, чт', time: '13:20 – 15:10', info: '1.8 ч в пути / Прямой' },
-            { id: 5, price: '6 750 ₽', route: 'Москва — Ереван', date: '15 мая, пт', time: '11:20 – 15:40', info: '4.2 ч в пути / Прямой' },
-            { id: 6, price: '3 890 ₽', route: 'Москва — Мин. воды', date: '16 мая, сб', time: '08:45 – 11:30', info: '2.8 ч в пути / Прямой' }
-        ];
-    }
+  // Запрашиваем массив рейсов с бэкенда через классический XHR (XMLHttpRequest)
+  getData() {
+    const url = stockUrls.getStocks(); // Получит http://localhost:3000/api/flights
 
-    get pageRoot() {
-        return document.getElementById('main-page');
-    }
+    ajax.get(url, (data, status) => {
+      if (status === 200 && data) {
+        // Если сервер успешно вернул данные — отправляем их на отрисовку
+        this.renderData(data);
+      } else {
+        const container = document.getElementById("main-page-content");
+        if (container) {
+          container.innerHTML = `<p style="text-align:center; color:red;">Ошибка загрузки рейсов (Status: ${status})</p>`;
+        }
+      }
+    });
+  }
 
-    getHTML() {
-        return `
-            <div class="section-header">
-                <h2 class="section-title">Горячие билеты</h2>
+  // Функция перебора коллекции данных и отрисовки карточек
+  renderData(items) {
+    const container = document.getElementById("main-page-content");
+    if (!container) return;
+
+    container.innerHTML = ""; // Очищаем заглушку загрузки
+
+    items.forEach((item) => {
+      // Создаем экземпляр карточки для каждого рейса
+      const productCard = new ProductCardComponent(container);
+      // Рендерим карточку и передаем коллбэк клика
+      productCard.render(item, this.clickCard.bind(this));
+    });
+  }
+
+  // Слушатель клика по карточке для перехода на страницу "Подробнее"
+  clickCard(e) {
+    const cardId = e.currentTarget.dataset.id;
+    // Передаем тот же самый родительский элемент
+    const productPage = new ProductPage(this.parent, cardId);
+    productPage.render();
+  }
+
+  getHTML() {
+    return `
+        <div class="container mt-5">
+            <h1 class="text-center mb-4" style="font-weight: 800;">✈️ Доступные авиарейсы</h1>
+            
+            <div id="main-page-content" class="flight-cards-scroll">
+                <p style="text-align:center; width: 100%;">Загрузка списка рейсов с сервера...</p>
             </div>
-            <div class="flights-grid" id="main-page"></div>
-        `;
-    }
+        </div>
+    `;
+  }
 
-    clickCard(e) {
-        const cardId = e.target.dataset.id;
-        const productPage = new ProductPage(this.parent, cardId);
-        productPage.render();
-    }
+  render() {
+    // Очищаем родительский контейнер перед отрисовкой структуры
+    this.parent.innerHTML = "";
 
-    render() {
-        this.parent.innerHTML = '';
-        const html = this.getHTML();
-        this.parent.insertAdjacentHTML('beforeend', html);
+    const html = this.getHTML();
+    this.parent.insertAdjacentHTML("beforeend", html);
 
-        const data = this.getData();
-        data.forEach((item) => {
-            const productCard = new ProductCardComponent(this.pageRoot);
-            productCard.render(item, this.clickCard.bind(this));
-        });
-    }
+    // Запускаем единственный, чистый асинхронный запрос к серверу за рейсами
+    this.getData();
+  }
 }
