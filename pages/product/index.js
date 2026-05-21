@@ -3,49 +3,55 @@ import { BackButtonComponent } from "../../components/back-button/index.js";
 import { MainPage } from "../main/index.js";
 
 export class ProductPage {
-    // Вторым параметром принимаем сам объект билета
-    constructor(parent, flightData) { 
+    constructor(parent, id) {
         this.parent = parent;
-        this.flightData = flightData;
+        this.id = parseInt(id);
     }
 
+    // Получаем конкретный билет по ID через fetch
     async getData() {
-        // Просто отдаем этот же объект
-        return this.flightData;
+        try {
+            const response = await fetch(`/api/flights/${this.id}`);
+            if (!response.ok) throw new Error('Билет не найден');
+            
+            const data = await response.json();
+            this.renderData(data);
+        } catch (error) {
+            console.error('Ошибка в ProductPage:', error);
+        }
     }
 
-    get pageRoot() {
-        return document.getElementById('product-page');
+    renderData(data) {
+        const productPageRoot = document.getElementById('product-page');
+        if (!productPageRoot) return;
+
+        if (data) {
+            const product = new ProductComponent(productPageRoot);
+            product.render(data);
+        } else {
+            productPageRoot.innerHTML = '<h3 style="text-align: center; margin-top: 50px;">Билет не найден.</h3>';
+        }
     }
 
     getHTML() {
         return `
             <div id="back-button-container" style="margin-bottom: 24px;"></div>
-            <div id="product-page"></div>
+            <div id="product-page">Загрузка данных...</div>
         `;
     }
 
     clickBack() {
-        const mainPage = new MainPage(this.parent);
-        mainPage.render();
+        new MainPage(this.parent).render();
     }
 
-    async render() {
+    render() {
         this.parent.innerHTML = '';
-        const html = this.getHTML();
-        this.parent.insertAdjacentHTML('beforeend', html);
+        this.parent.insertAdjacentHTML('beforeend', this.getHTML());
 
         const backButtonContainer = document.getElementById('back-button-container');
         const backButton = new BackButtonComponent(backButtonContainer);
         backButton.render(this.clickBack.bind(this));
 
-        const data = await this.getData();
-        
-        if (data) {
-            const product = new ProductComponent(this.pageRoot);
-            product.render(data);
-        } else {
-            this.pageRoot.innerHTML = '<h3 style="text-align: center; margin-top: 50px;">Извините, информация о билете не найдена.</h3>';
-        }
+        this.getData();
     }
 }
