@@ -4,7 +4,7 @@ export class ProductCardComponent {
     }
 
     getHTML(data) {
-        // Проверяем флаг isPaid, полученный с бэкенда
+        // Проверяем флаг isPaid
         const priceDisplay = data.isPaid ? `<span style="color: #22c55e;">Оплачен</span>` : data.price;
 
         return `

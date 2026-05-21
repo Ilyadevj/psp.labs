@@ -1,20 +1,26 @@
 import { ProductCardComponent } from "../../components/product-card/index.js";
 import { ProductPage } from "../product/index.js";
 
+// Этот массив лежит ВНЕ класса. Он один на всё приложение и сохраняет 
+// все изменения (например, статус оплаты), пока мы переключаем экраны.
+const flightsList = [
+    { id: 1, route: "Москва — Стамбул", price: "15 500 ₽", date: "20.05.2026", time: "10:00 – 15:30", info: "5.5 ч / Прямой", baggage: "1 место до 23 кг", refund: "Возврат со штрафом", isPaid: false },
+    { id: 2, route: "Москва — Дубай", price: "25 000 ₽", date: "22.05.2026", time: "09:00 – 14:00", info: "5 ч / Прямой", baggage: "Без багажа", refund: "Билет невозвратный", isPaid: false },
+    { id: 3, route: "Москва — Ереван", price: "12 300 ₽", date: "25.05.2026", time: "12:00 – 16:00", info: "4 ч / Прямой", baggage: "1 место до 23 кг", refund: "Полный возврат", isPaid: false },
+    { id: 4, route: "Москва — Тбилиси", price: "18 900 ₽", date: "26.05.2026", time: "11:15 – 15:45", info: "4.5 ч / Прямой", baggage: "1 место до 20 кг", refund: "Возврат со штрафом", isPaid: false },
+    { id: 5, route: "Москва — Анталья", price: "21 500 ₽", date: "27.05.2026", time: "08:30 – 13:40", info: "5 ч 10 мин / Прямой", baggage: "1 место до 20 кг", refund: "Билет невозвратный", isPaid: false },
+    { id: 6, route: "Москва — Бангкок", price: "45 000 ₽", date: "28.05.2026", time: "19:40 – 08:30", info: "9 ч 50 мин / Прямой", baggage: "1 место до 23 кг", refund: "Полный возврат", isPaid: false },
+    { id: 7, route: "Москва — Баку", price: "14 200 ₽", date: "29.05.2026", time: "14:00 – 18:15", info: "3 ч 15 мин / Прямой", baggage: "Без багажа", refund: "Билет невозвратный", isPaid: false },
+    { id: 8, route: "Москва — Пхукет", price: "48 900 ₽", date: "30.05.2026", time: "21:00 – 10:20", info: "10 ч 20 мин / Прямой", baggage: "1 место до 23 кг", refund: "Возврат со штрафом", isPaid: false }
+];
+
 export class MainPage {
     constructor(parent) {
         this.parent = parent;
     }
 
-async getData() {
-        try {
-            const response = await fetch('http://localhost:3000/api/flights');
-            if (!response.ok) throw new Error('Ошибка при загрузке билетов');
-            return await response.json();
-        } catch (error) {
-            console.error('Ошибка сети:', error);
-            return []; 
-        }
+    async getData() {
+        return flightsList;
     }
 
     get pageRoot() {
@@ -31,17 +37,23 @@ async getData() {
     }
 
     clickCard(e) {
-        const cardId = e.target.dataset.id;
-        const productPage = new ProductPage(this.parent, cardId);
-        productPage.render();
+        const cardId = parseInt(e.target.dataset.id);
+        // Находим оригинальный объект билета из нашего общего списка
+        const currentFlight = flightsList.find(f => f.id === cardId);
+
+        if (currentFlight) {
+            // Передаем ССЫЛКУ на этот объект билета в ProductPage
+            const productPage = new ProductPage(this.parent, currentFlight);
+            productPage.render();
+        }
     }
 
-async render() {
+    async render() {
         this.parent.innerHTML = '';
         const html = this.getHTML();
         this.parent.insertAdjacentHTML('beforeend', html);
 
-        const data = await this.getData(); // Ждем данные от бэкенда
+        const data = await this.getData(); 
         
         data.forEach((item) => {
             const productCard = new ProductCardComponent(this.pageRoot);

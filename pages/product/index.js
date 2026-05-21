@@ -3,20 +3,15 @@ import { BackButtonComponent } from "../../components/back-button/index.js";
 import { MainPage } from "../main/index.js";
 
 export class ProductPage {
-    constructor(parent, id) {
+    // Вторым параметром принимаем сам объект билета
+    constructor(parent, flightData) { 
         this.parent = parent;
-        this.id = parseInt(id);
+        this.flightData = flightData;
     }
 
-async getData() {
-        try {
-            const response = await fetch(`http://localhost:3000/api/flights/${this.id}`);
-            if (!response.ok) throw new Error('Билет не найден');
-            return await response.json();
-        } catch (error) {
-            console.error('Ошибка сети:', error);
-            return null;
-        }
+    async getData() {
+        // Просто отдаем этот же объект
+        return this.flightData;
     }
 
     get pageRoot() {
@@ -44,7 +39,7 @@ async getData() {
         const backButton = new BackButtonComponent(backButtonContainer);
         backButton.render(this.clickBack.bind(this));
 
-        const data = await this.getData(); // Ждем данные от бэкенда
+        const data = await this.getData();
         
         if (data) {
             const product = new ProductComponent(this.pageRoot);

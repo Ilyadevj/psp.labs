@@ -119,7 +119,7 @@ body {
     border: 1px solid var(--primary);
 }
 
-.display {
+.calc-display {
     font-family: 'JetBrains Mono', 'Courier New', monospace;
     font-size: 48px;
     font-weight: 600;
@@ -352,4 +352,8 @@ body.light-theme .calc-btn.number {
     .buttons-grid {
         gap: 8px;
     }
+}
+
+body.light-theme .calc-display { 
+    color: var(--primary);
 }
