@@ -1,6 +1,6 @@
 class StockUrls {
     constructor() {
-        // Заменили localhost на жесткий IP, чтобы Mac не блокировал кросс-доменные XHR
+        // МЕНЯЕМ ТУТ: строго 127.0.0.1 вместо localhost
         this.baseUrl = 'http://127.0.0.1:3000'; 
     }
 
