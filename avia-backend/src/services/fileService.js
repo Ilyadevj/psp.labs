@@ -1,21 +1,39 @@
 const fs = require('fs');
 
-const readData = (filePath) => {
-    try {
-        const data = fs.readFileSync(filePath, 'utf8');
-        return JSON.parse(data);
-    } catch (err) {
-        console.error('Ошибка чтения файла:', err);
-        return [];
+class FlightsService {
+    constructor() {
+        this.dataPath = '';
+        this.flights = [];
     }
-};
 
-const writeData = (filePath, data) => {
-    try {
-        fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
-    } catch (err) {
-        console.error('Ошибка записи файла:', err);
+    init(dataPath) {
+        this.dataPath = dataPath;
+        const fileContent = fs.readFileSync(this.dataPath, 'utf-8');
+        this.flights = JSON.parse(fileContent);
     }
-};
 
-module.exports = { readData, writeData };
+    getAll() {
+        return this.flights;
+    }
+
+    getById(id) {
+        return this.flights.find(f => f.id === id);
+    }
+
+    update(id, dataToUpdate) {
+        const flightIndex = this.flights.findIndex(f => f.id === id);
+        if (flightIndex === -1) return null;
+
+        // Обновляем данные в памяти
+        this.flights[flightIndex] = {
+            ...this.flights[flightIndex],
+            ...dataToUpdate
+        };
+
+        // Записываем в файл синхронно
+        fs.writeFileSync(this.dataPath, JSON.stringify(this.flights, null, 2), 'utf-8');
+        return this.flights[flightIndex];
+    }
+}
+
+module.exports = new FlightsService();
