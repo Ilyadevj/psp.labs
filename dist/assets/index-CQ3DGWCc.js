@@ -8,24 +8,27 @@
                 <button class="flight-book" id="click-card-${e.id}" data-id="${e.id}">Подробнее</button>
             </div>
         `}addListeners(e,t){document.getElementById(`click-card-${e.id}`).addEventListener(`click`,t)}render(e,t){let n=this.getHTML(e);this.parent.insertAdjacentHTML(`beforeend`,n),this.addListeners(e,t)}},t=class{constructor(e){this.parent=e}getPriceHTML(e){return e.isPaid?`<span style="color: #22c55e;">Оплачен</span>`:e.price}getButtonsHTML(e){return e.isPaid?`
-                <div class="d-flex gap-2 w-100">
-                    <button class="btn btn-success" style="flex: 1; padding: 14px; border-radius: 16px; font-weight: 700; border: none; background: #22c55e; color: white;" disabled>
-                        Оплачено
+                <div class="d-flex gap-2 w-100" style="height: 100%;">
+                    <button class="btn btn-success" style="flex: 1; border-radius: 16px; font-weight: 700; border: none; background: #22c55e; color: white; display: flex; align-items: center; justify-content: center; transition: background 0.2s;" disabled>
+                        ✓ Оплачено
                     </button>
-                    <button id="cancel-btn-${e.id}" class="btn btn-outline-danger" style="flex: 1; padding: 14px; border-radius: 16px; font-weight: 700; border: 2px solid #ef4444; color: #ef4444; background: white; cursor: pointer;">
+                    <button id="cancel-btn-${e.id}" class="btn btn-outline-danger" style="flex: 1; border-radius: 16px; font-weight: 700; border: 2px solid #ef4444; color: #ef4444; background: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s;">
                         Отменить
                     </button>
-                </div>`:`<button id="buy-btn-${e.id}" class="search-btn w-100" style="padding: 14px 28px; border-radius: 16px; font-weight: 700; font-size: 16px; border: none; background: #2563eb; color: white; cursor: pointer;">Купить билет</button>`}getHTML(e){return`
+                </div>`:`<button id="buy-btn-${e.id}" class="search-btn w-100" style="height: 100%; border-radius: 16px; font-weight: 700; font-size: 16px; border: none; background: #2563eb; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s;">Купить билет</button>`}getHTML(e){return`
             <div class="flight-card" style="max-width: 600px; margin: 0 auto; box-shadow: var(--shadow); background: white; padding: 24px; border-radius: 24px;">
                 <div class="flight-route" style="font-size: 24px; text-align: center; font-weight: 700;">${e.route}</div>
-                <div class="flight-price" id="detail-price-${e.id}" style="font-size: 36px; text-align: center; margin: 16px 0; font-weight: 800;">
+                
+                <div class="flight-price" id="detail-price-${e.id}" style="font-size: 36px; text-align: center; margin: 16px 0; font-weight: 800; height: 43px; display: flex; align-items: center; justify-content: center;">
                     ${this.getPriceHTML(e)}
                 </div>
+                
                 <div class="flight-date" style="font-size: 16px; text-align: center; margin-bottom: 24px; color: #64748b;">Вылет: ${e.date} в ${e.time}</div>
-                <div id="button-container-${e.id}" class="mt-4 d-flex justify-content-center" style="margin-top: 24px;">
+                
+                <div id="button-container-${e.id}" class="mt-4 w-100" style="height: 52px;">
                     ${this.getButtonsHTML(e)}
                 </div>
-            </div>`}addListeners(e){let t=document.getElementById(`button-container-${e.id}`),n=document.getElementById(`detail-price-${e.id}`),r=()=>{let i=document.getElementById(`buy-btn-${e.id}`),a=document.getElementById(`cancel-btn-${e.id}`);i&&i.addEventListener(`click`,async()=>{i.innerText=`Обработка...`,i.disabled=!0;try{e.isPaid=(await(await fetch(`/api/flights/${e.id}`,{method:`PATCH`,headers:{"Content-Type":`application/json`},body:JSON.stringify({isPaid:!0})})).json()).isPaid,n.innerHTML=this.getPriceHTML(e),t.innerHTML=this.getButtonsHTML(e),r()}catch(e){console.error(e)}}),a&&a.addEventListener(`click`,async()=>{a.innerText=`Отмена...`,a.disabled=!0;try{e.isPaid=(await(await fetch(`/api/flights/${e.id}`,{method:`PATCH`,headers:{"Content-Type":`application/json`},body:JSON.stringify({isPaid:!1})})).json()).isPaid,n.innerHTML=this.getPriceHTML(e),t.innerHTML=this.getButtonsHTML(e),r()}catch(e){console.error(e)}})};r()}render(e){this.parent.innerHTML=this.getHTML(e),this.addListeners(e)}},n=class{constructor(e){this.parent=e}addListeners(e){document.getElementById(`back-button`).addEventListener(`click`,e)}getHTML(){return`
+            </div>`}addListeners(e){let t=document.getElementById(`button-container-${e.id}`),n=document.getElementById(`detail-price-${e.id}`);t&&n&&(t.style.transition=`opacity 0.3s ease-in-out, transform 0.3s ease-in-out`,n.style.transition=`opacity 0.3s ease-in-out, transform 0.3s ease-in-out`);let r=async r=>{t&&n&&(t.style.opacity=`0`,t.style.transform=`translateY(10px)`,n.style.opacity=`0`,n.style.transform=`translateY(-10px)`),await new Promise(e=>setTimeout(e,300)),e.isPaid=r.isPaid,n&&(n.innerHTML=this.getPriceHTML(e)),t&&(t.innerHTML=this.getButtonsHTML(e)),i(),t&&t.offsetWidth,t&&n&&(t.style.opacity=`1`,t.style.transform=`translateY(0)`,n.style.opacity=`1`,n.style.transform=`translateY(0)`)},i=()=>{let t=document.getElementById(`buy-btn-${e.id}`),n=document.getElementById(`cancel-btn-${e.id}`);t&&t.addEventListener(`click`,async()=>{t.innerHTML=`<span class="spinner-border spinner-border-sm" style="margin-right: 8px;"></span> Ожидайте...`,t.disabled=!0,await new Promise(e=>setTimeout(e,500)),t.innerHTML=`<span class="spinner-border spinner-border-sm" style="margin-right: 8px;"></span> Обработка...`;try{await r(await(await fetch(`/api/flights/${e.id}`,{method:`PATCH`,headers:{"Content-Type":`application/json`},body:JSON.stringify({isPaid:!0})})).json())}catch(e){console.error(e)}}),n&&n.addEventListener(`click`,async()=>{n.innerHTML=`<span class="spinner-border spinner-border-sm" style="margin-right: 8px;"></span> Ожидайте...`,n.disabled=!0,await new Promise(e=>setTimeout(e,500)),n.innerHTML=`<span class="spinner-border spinner-border-sm" style="margin-right: 8px;"></span> Отмена...`;try{await r(await(await fetch(`/api/flights/${e.id}`,{method:`PATCH`,headers:{"Content-Type":`application/json`},body:JSON.stringify({isPaid:!1})})).json())}catch(e){console.error(e)}})};i()}render(e){this.parent.innerHTML=this.getHTML(e),this.addListeners(e)}},n=class{constructor(e){this.parent=e}addListeners(e){document.getElementById(`back-button`).addEventListener(`click`,e)}getHTML(){return`
             <button id="back-button" class="more-btn" style="cursor: pointer; padding: 8px 24px;">
                 &larr; Назад к поиску
             </button>
