@@ -1,113 +1,198 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>avia — Отели</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="hotels.css">
-</head>
-<body>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="hotels.css" />
+  </head>
+  <body>
     <header class="header">
-        <div class="header__container">
-            <a class="logo" href="index.html">
-                <span class="logo-icon">✈️</span>
-                <span class="logo-text">avia</span>
-            </a>
-            <nav class="nav">
-                <a href="index.html" class="nav-link">Авиабилеты</a>
-                <a href="hotels.html" class="nav-link active">Отели</a>
-                <a href="calc.html" class="nav-link">Калькулятор</a>
-                <a href="#" class="nav-link">Профиль</a>
-            </nav>
-        </div>
+      <div class="header__container">
+        <a class="logo" href="index.html">
+          <span class="logo-icon">✈️</span>
+          <span class="logo-text">avia</span>
+        </a>
+        <nav class="nav">
+          <a href="index.html" class="nav-link">Авиабилеты</a>
+          <a href="hotels.html" class="nav-link active">Отели</a>
+          <a href="calc.html" class="nav-link">Калькулятор</a>
+          <a href="#" class="nav-link">Профиль</a>
+        </nav>
+      </div>
     </header>
 
     <main>
-        <section class="hotels-hero">
-            <div class="hotels__container">
-                <div class="hotels__content">
-                    <h1 class="hotels__title">Найдём отель <span class="gradient-text">без наценок</span></h1>
-                    <p class="hotels__subtitle">Бронируйте напрямую у отелей по всему миру</p>
+      <section class="hotels-hero">
+        <div class="hotels__container">
+          <div class="hotels__content">
+            <h1 class="hotels__title">
+              Найдём отель <span class="gradient-text">без наценок</span>
+            </h1>
+            <p class="hotels__subtitle">
+              Бронируйте напрямую у отелей по всему миру
+            </p>
 
-                    <div class="hotels-search-card">
-                        <div class="hotels-search-form">
-                            <div class="hotels-form-group full-width">
-                                <label>Куда отправитесь?</label>
-                                <div class="input-icon">
-                                    <span class="icon">📍</span>
-                                    <input type="text" id="hotelDestination" placeholder="Страна, город, отель" value="Стамбул, Турция">
-                                </div>
-                            </div>
-
-                            <div class="hotels-form-row">
-                                <div class="hotels-form-group">
-                                    <label>Дата заезда</label>
-                                    <div class="input-icon">
-                                        <span class="icon">📅</span>
-                                        <input type="date" id="checkinDate" value="2026-06-15">
-                                    </div>
-                                </div>
-                                <div class="hotels-form-group">
-                                    <label>Дата выезда</label>
-                                    <div class="input-icon">
-                                        <span class="icon">📅</span>
-                                        <input type="date" id="checkoutDate" value="2026-06-22">
-                                    </div>
-                                </div>
-                                <div class="hotels-form-group">
-                                    <label>Гости</label>
-                                    <div class="input-icon">
-                                        <span class="icon">👥</span>
-                                        <select id="guestsCount">
-                                            <option>1 взрослый</option>
-                                            <option selected>2 взрослых</option>
-                                            <option>2 взрослых + 1 ребёнок</option>
-                                            <option>3 взрослых</option>
-                                            <option>4 взрослых</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="hotels-form-group">
-                                    <button class="hotels-search-btn" id="hotelsSearchBtn">
-                                        Найти отели
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="benefits-grid">
-                        <div class="benefit-card">
-                            <div class="benefit-icon">🏨</div>
-                            <h3>Бронируйте напрямую у отелей</h3>
-                            <p>Никаких посредников — лучшие цены и специальные предложения</p>
-                        </div>
-                        <div class="benefit-card large">
-                            <div class="benefit-icon">🏆</div>
-                            <h3>Тут больше всего отелей напрямую</h3>
-                            <p>Более 2 миллионов отелей по всему миру с прямым бронированием</p>
-                        </div>
-                    </div>
-
-                    <div class="popular-hotels">
-                        <h2 class="section-title">Популярные отели</h2>
-                        <div class="hotels-grid" id="hotelsGrid">
-                        </div>
-                    </div>
+            <div class="hotels-search-card">
+              <div class="hotels-search-form">
+                <div class="hotels-form-group full-width">
+                  <label>Куда отправитесь?</label>
+                  <div class="input-icon">
+                    <span class="icon">📍</span>
+                    <input
+                      type="text"
+                      id="hotelDestination"
+                      placeholder="Страна, город, отель"
+                      value="Стамбул, Турция"
+                    />
+                  </div>
                 </div>
+
+                <div class="hotels-form-row">
+                  <div class="hotels-form-group">
+                    <label>Дата заезда</label>
+                    <div class="input-icon">
+                      <span class="icon">📅</span>
+                      <input type="date" id="checkinDate" value="2026-06-15" />
+                    </div>
+                  </div>
+                  <div class="hotels-form-group">
+                    <label>Дата выезда</label>
+                    <div class="input-icon">
+                      <span class="icon">📅</span>
+                      <input type="date" id="checkoutDate" value="2026-06-22" />
+                    </div>
+                  </div>
+                  <div class="hotels-form-group">
+                    <label>Гости</label>
+                    <div class="input-icon">
+                      <span class="icon">👥</span>
+                      <div class="custom-dropdown" id="hotelsDropdown">
+                        <button
+                          type="button"
+                          class="dropdown-trigger"
+                          id="hotelDropdownTrigger"
+                        >
+                          <span id="hotelTriggerText">2 взрослых</span>
+                          <span class="arrow">▼</span>
+                        </button>
+
+                        <div class="dropdown-menu" id="hotelDropdownMenu">
+                          <div class="dropdown-section">
+                            <h3>Количество гостей</h3>
+
+                            <div class="counter-row">
+                              <div class="counter-label">
+                                <span class="label-title">Взрослые</span>
+                                <span class="label-subtitle"
+                                  >18 лет и старше</span
+                                >
+                              </div>
+                              <div class="counter-controls">
+                                <button
+                                  type="button"
+                                  class="counter-btn"
+                                  id="hotelMinusAdults"
+                                  disabled
+                                >
+                                  −
+                                </button>
+                                <span
+                                  class="counter-value"
+                                  id="hotelValueAdults"
+                                  >2</span
+                                >
+                                <button
+                                  type="button"
+                                  class="counter-btn"
+                                  id="hotelPlusAdults"
+                                >
+                                  +
+                                </button>
+                              </div>
+                            </div>
+
+                            <div class="counter-row">
+                              <div class="counter-label">
+                                <span class="label-title">Дети</span>
+                                <span class="label-subtitle"
+                                  >от 0 до 17 лет</span
+                                >
+                              </div>
+                              <div class="counter-controls">
+                                <button
+                                  type="button"
+                                  class="counter-btn"
+                                  id="hotelMinusChildren"
+                                  disabled
+                                >
+                                  −
+                                </button>
+                                <span
+                                  class="counter-value"
+                                  id="hotelValueChildren"
+                                  >0</span
+                                >
+                                <button
+                                  type="button"
+                                  class="counter-btn"
+                                  id="hotelPlusChildren"
+                                >
+                                  +
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="hotels-form-group">
+                    <button class="hotels-search-btn" id="hotelsSearchBtn">
+                      Найти отели
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
-        </section>
+
+            <div class="benefits-grid">
+              <div class="benefit-card">
+                <div class="benefit-icon">🏨</div>
+                <h3>Бронируйте напрямую у отелей</h3>
+                <p>
+                  Никаких посредников — лучшие цены и специальные предложения
+                </p>
+              </div>
+              <div class="benefit-card large">
+                <div class="benefit-icon">🏆</div>
+                <h3>Тут больше всего отелей напрямую</h3>
+                <p>
+                  Более 2 миллионов отелей по всему миру с прямым бронированием
+                </p>
+              </div>
+            </div>
+
+            <div class="popular-hotels">
+              <h2 class="section-title">Популярные отели</h2>
+              <div class="hotels-grid" id="hotelsGrid"></div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer class="footer">
-        <p>🏨 avia — бронирование отелей напрямую</p>
-
+      <p>🏨 avia — бронирование отелей напрямую</p>
     </footer>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

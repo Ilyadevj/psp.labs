@@ -166,3 +166,126 @@ if (registerForm) {
         loginModal.classList.add('show');
     });
 }
+// === КАСТОМНЫЕ ДРОПДАУНЫ ДЛЯ АВИАБИЛЕТОВ И ОТЕЛЕЙ ===
+document.addEventListener("DOMContentLoaded", () => {
+    
+    // --- 1. Логика дропдауна АВИАБИЛЕТОВ ---
+    const flightTrigger = document.getElementById("dropdownTrigger");
+    const flightMenu = document.getElementById("dropdownMenu");
+    const flightTriggerText = document.getElementById("triggerText");
+
+    if (flightTrigger && flightMenu) {
+        let flightState = { adults: 1, children: 0, infants: 0, class: "Эконом" };
+
+        flightTrigger.addEventListener("click", (e) => {
+            e.stopPropagation();
+            flightMenu.classList.toggle("show");
+        });
+
+        // Функция обновления строки текста
+        const updateFlightText = () => {
+            const total = flightState.adults + flightState.children + flightState.infants;
+            let word = "пассажиров";
+            if (total === 1) word = "пассажир";
+            else if (total > 1 && total < 5) word = "пассажира";
+            flightTriggerText.innerText = `${total} ${word}, ${flightState.class.toLowerCase()}`;
+        };
+
+        // Обработчики для счетчиков авиабилетов
+        const setupCounter = (plusId, minusId, valueId, stateKey, minVal) => {
+            const plus = document.getElementById(plusId);
+            const minus = document.getElementById(minusId);
+            const value = document.getElementById(valueId);
+
+            plus.addEventListener("click", (e) => {
+                e.stopPropagation();
+                flightState[stateKey]++;
+                value.innerText = flightState[stateKey];
+                minus.disabled = false;
+                updateFlightText();
+            });
+
+            minus.addEventListener("click", (e) => {
+                e.stopPropagation();
+                if (flightState[stateKey] > minVal) {
+                    flightState[stateKey]--;
+                    value.innerText = flightState[stateKey];
+                    if (flightState[stateKey] === minVal) minus.disabled = true;
+                    updateFlightText();
+                }
+            });
+        };
+
+        setupCounter("plusAdults", "minusAdults", "valueAdults", "adults", 1);
+        setupCounter("plusChildren", "minusChildren", "valueChildren", "children", 0);
+        setupCounter("plusInfants", "minusInfants", "valueInfants", "infants", 0);
+
+        // Радиокнопки классов
+        document.querySelectorAll('input[name="flightClass"]').forEach(radio => {
+            radio.addEventListener("change", (e) => {
+                flightState.class = e.target.value;
+                updateFlightText();
+            });
+        });
+    }
+
+    // --- 2. Логика дропдауна ОТЕЛЕЙ ---
+    const hotelTrigger = document.getElementById("hotelDropdownTrigger");
+    const hotelMenu = document.getElementById("hotelDropdownMenu");
+    const hotelTriggerText = document.getElementById("hotelTriggerText");
+
+    if (hotelTrigger && hotelMenu) {
+        let hotelState = { adults: 2, children: 0 };
+
+        hotelTrigger.addEventListener("click", (e) => {
+            e.stopPropagation();
+            hotelMenu.classList.toggle("show");
+        });
+
+        const updateHotelText = () => {
+            let text = `${hotelState.adults} взрослых`;
+            if (hotelState.adults === 1) text = `1 взрослый`;
+            if (hotelState.children > 0) {
+                text += ` + ${hotelState.children} ${hotelState.children === 1 ? 'ребёнок' : 'детей'}`;
+            }
+            hotelTriggerText.innerText = text;
+        };
+
+        const setupHotelCounter = (plusId, minusId, valueId, stateKey, minVal) => {
+            const plus = document.getElementById(plusId);
+            const minus = document.getElementById(minusId);
+            const value = document.getElementById(valueId);
+
+            if(flightTrigger && minus && flightMenu) {
+                if (hotelState[stateKey] > minVal) minus.disabled = false;
+            }
+
+            plus.addEventListener("click", (e) => {
+                e.stopPropagation();
+                hotelState[stateKey]++;
+                value.innerText = hotelState[stateKey];
+                minus.disabled = false;
+                updateHotelText();
+            });
+
+            minus.addEventListener("click", (e) => {
+                e.stopPropagation();
+                if (hotelState[stateKey] > minVal) {
+                    hotelState[stateKey]--;
+                    value.innerText = hotelState[stateKey];
+                    if (hotelState[stateKey] === minVal) minus.disabled = true;
+                    updateHotelText();
+                }
+            });
+        };
+
+        setupHotelCounter("hotelPlusAdults", "hotelMinusAdults", "hotelValueAdults", "adults", 1);
+        setupHotelCounter("hotelPlusChildren", "hotelMinusChildren", "hotelValueChildren", "children", 0);
+    }
+
+    // Глобальное закрытие всех окон при клике вне их области
+    document.addEventListener("click", () => {
+        if (flightMenu) flightMenu.classList.remove("show");
+        if (hotelMenu) hotelMenu.classList.remove("show");
+    });
+});

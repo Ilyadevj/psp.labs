@@ -38,8 +38,8 @@
     background: var(--white);
     border-radius: 32px;
     box-shadow: var(--shadow);
-    overflow: hidden;
     margin-bottom: 48px;
+    position: relative;
 }
 
 .hotels-search-form {

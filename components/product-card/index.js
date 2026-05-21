@@ -4,9 +4,12 @@ export class ProductCardComponent {
     }
 
     getHTML(data) {
+        // Проверяем флаг isPaid, полученный с бэкенда
+        const priceDisplay = data.isPaid ? `<span style="color: #22c55e;">Оплачен</span>` : data.price;
+
         return `
             <div class="flight-card">
-                <div class="flight-price">${data.price}</div>
+                <div class="flight-price">${priceDisplay}</div>
                 <div class="flight-route">${data.route}</div>
                 <div class="flight-date">${data.date}</div>
                 <div class="flight-time">${data.time}</div>

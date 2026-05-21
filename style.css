@@ -103,8 +103,9 @@ body {
     background: var(--white);
     border-radius: 32px;
     box-shadow: var(--shadow);
-    overflow: hidden;
+    /* overflow: hidden; */ /* <-- Эту строчку нужно удалить или закомментировать! */
     margin-bottom: 48px;
+    position: relative; /* Чтобы выпадающее меню позиционировалось относительно карточки */
 }
 
 .search-form {
@@ -573,4 +574,166 @@ body {
 
 .modal-footer a:hover {
     color: var(--secondary);
+}
+
+/* --- Кастомный Дропдаун Пассажиров и Гостей --- */
+.custom-dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.dropdown-trigger {
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--white);
+    border: 2px solid var(--gray-border);
+    border-radius: 16px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.dropdown-trigger:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.dropdown-trigger .arrow {
+    font-size: 10px;
+    color: var(--text-light);
+    transition: transform 0.2s;
+}
+
+/* Меню дропдауна */
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 100%;
+    min-width: 320px;
+    background: var(--white);
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+    padding: 24px;
+    z-index: 1100;
+    display: none; /* Скрыто по умолчанию */
+    flex-direction: column;
+}
+
+.dropdown-menu.show {
+    display: flex;
+}
+
+.dropdown-section h3 {
+    margin: 0 0 16px 0;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text);
+}
+
+/* Строки интерфейса */
+.counter-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.counter-row:last-child {
+    margin-bottom: 0;
+}
+
+.counter-label {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.label-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.label-subtitle {
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+/* Кнопки управления */
+.counter-controls {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.counter-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--gray-border);
+    background: var(--gray);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.counter-btn:hover:not(:disabled) {
+    background: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+}
+
+.counter-btn:disabled {
+    color: #cbd5e1;
+    cursor: not-allowed;
+    background: var(--white);
+}
+
+.counter-value {
+    font-size: 16px;
+    font-weight: 700;
+    min-width: 16px;
+    text-align: center;
+}
+
+.dropdown-divider {
+    border: 0;
+    border-top: 1px solid var(--gray-border);
+    margin: 16px 0;
+}
+
+/* Радиокнопки выбора класса */
+.radio-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+}
+
+.radio-row:last-child {
+    margin-bottom: 0;
+}
+
+.radio-row input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary);
+    cursor: pointer;
 }
