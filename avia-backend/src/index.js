@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const cors = require('cors'); // Подключаем CORS для связи с фронтендом
+const cors = require('cors'); 
 const flightsRouter = require('./routes/flights');
 const flightsService = require('./services/flightsService');
 
